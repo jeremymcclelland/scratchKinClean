@@ -1,0 +1,105 @@
+<header class="kin-header">
+    <div class="kin-header__inner">
+        <div class="kin-header__left">
+            <button class="kin-header__menu-toggle js-menu-toggle">
+                menu
+            </button>
+        </div>
+
+        <div class="kin-header__flyout-menu">
+            <div class="kin-header__flyout-menu-inner">
+                {% if linklists['main-menu'].links %}
+                <ul class="kin-header__main-menu">
+                    {%- for link in linklists['main-menu'].links -%}
+                        <li class="kin-header__main-menu-item">
+                            <a href="{{ link.url }}" class="kin-header__main-menu-item-link">
+                                {%- if link.title contains "::" -%}
+                                    {%- assign linkData = link.title | split: "::" -%}
+                                    <image class="kin-header__main-menu-item-link-image" loading="lazy" width="260" height="auto" src="{{ linkData[0] | file_img_url: '260x194', crop: 'center' }}" alt="{{ linkData[1] }}" />
+                                    {{ linkData[1] }}
+                                {%- else -%}
+                                    {{ link.title }}
+                                {%- endif -%}
+                            </a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+                {% endif %}
+
+                {% if linklists['secondary'].links %}
+                <ul class="kin-header__secondary-menu">
+                    {%- for link in linklists['secondary'].links -%}
+                        <li class="kin-header__secondary-menu-item">
+                            <a href="{{ link.url }}" class="kin-header__secondary-menu-item-link">
+                                {{ link.title }}
+                            </a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="kin-header__overlay"></div>
+
+        <div class="kin-header__branding">
+            <a href="{{ routes.root_url }}" class="kin-header__branding-link">
+                {%- if section.settings.logo_image == blank -%}
+                    {% render 'logo.svg' %}
+                {%- else -%}
+                    {{ section.settings.logo_image | image_url: width: 500 | image_tag: class: 'kin-header__branding-image', alt: shop.name  }}
+                {%- endif -%}
+            </a>
+        </div>
+        <div class="kin-header__right">
+            <button class="kin-header__cart-toggle js-cart-toggle">
+                {% render 'cart.svg' %}
+            </button>
+        </div>
+
+        <div class="kin-header__mini-cart {% if cart.item_count > 0 %}kin-header__mini-cart--full{% endif %}">
+
+            <div class="kin-header__mini-cart-header">
+                <span></span>
+                <div class="kin-header__mini-cart-logo">
+                    {% render 'logo.svg' %}
+                </div>
+
+                <div class="kin-header__mini-cart-close-wrap">
+                    <button class="kin-header__mini-cart-close">
+                        {% render 'arrow.svg' %}
+                    </button>
+                </div>
+            </div>
+
+            <div class="kin-header__mini-cart-contents">
+                {% include 'cart-contents' %}
+            </div>
+
+            <div class="kin-header__mini-cart-footer">
+                <a href="/checkout" class="kin-header__mini-cart-checkout kin-button kin-button--primary">Checkout</a>
+
+                <a href="#" class="kin-header__mini-cart-close-btn kin-button kin-button--primary">Keep Shopping</a>
+            </div>
+
+
+
+        </div>
+        <div class="kin-header__cart-overlay"></div>
+    </div>
+</header>
+
+
+{% schema %}
+{
+  "name": "Global Header",
+  "tag": "section",
+  "settings": [
+    {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo image"
+    }
+  ]
+}
+{% endschema %}

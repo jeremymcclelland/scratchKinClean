@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "1654119239fc86f3f8": {
+      "type": "hero",
+      "settings": {
+        "title": "Bliss up for<br><em>Bliss<\/em>tober",
+        "hero_content": "For a limited time, bundle your bliss and save.",
+        "hero_helper_text": "(1x High Rhode, 1x Dream Light, and a 20-Pack of Kin Spritz.",
+        "hero_image": "shopify:\/\/shop_images\/Screen_Shot_2020-09-21_at_9.45.59_AM.jpg",
+        "hero_image_mobile": "shopify:\/\/shop_images\/image_1.jpg",
+        "background": "linear-gradient(180deg, rgba(104, 90, 143, 1), rgba(104, 90, 143, 1) 64%, rgba(145, 120, 181, 1) 100%)",
+        "hero_product": "d0-bar-stool"
+      }
+    }
+  },
+  "order": [
+    "1654119239fc86f3f8"
+  ]
+}

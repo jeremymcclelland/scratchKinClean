@@ -1,0 +1,9 @@
+<div id="page-cart" class="wrapper">
+    {% if cart.item_count > 0 %}
+      cart not empty
+    {% endif %}
+
+    <div class="js-cart-page-contents cart-page-contents" data-cart-item-count="{{ cart.item_count }}">
+      {% include 'cart-contents' %}
+    </div>
+  </div>

@@ -1,0 +1,14 @@
+build/*
+node_modules/
+package.json
+package-lock.json
+configs.json
+configs.sample.json
+gulpfile.js
+rollup.config.js
+gulpBuilds/
+src/
+.stylelintrc.json
+.eslintrc.js
+.eslintignore
+.editorconfig

@@ -1,0 +1,38 @@
+
+{% if cart.item_count > 0 %}
+
+
+    <form class="cart-form" action="/cart" method="post" novalidate>
+    <fieldset id="cart-fieldset" class="js-cart-fieldset">
+
+        <div class="cart-lines">
+        {% for item in cart.items %}
+            {% include 'line-item' %}
+        {% endfor %}
+        </div>
+
+        <div class="cart-totals">
+        <div class="subtotal-line">
+            <h3>Subtotal</h3>
+            <span class="price">
+            {{ cart.total_price | money }}
+            </span>
+        </div>
+
+        </div>
+
+    </fieldset>
+    </form>
+
+
+{% else %}
+
+
+    <div class="kin-header__mini-cart-empty">
+        <h3 class="kin-header__mini-cart-empty-text">
+            Your cart is thirsty.
+        </h3>
+    </div>
+
+{% endif %}
+

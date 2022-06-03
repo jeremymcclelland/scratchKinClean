@@ -1,0 +1,30 @@
+<div class="line-item">
+    <div class="line-item__image-wrapper">
+      {{ item | image_url: width: 150 | image_tag: loading: 'lazy', class: 'line-item__image', alt: item.title  }}
+    </div>
+
+    <div class="line-item__info">
+          <a class="line-item__title" href="{{ item.url }}">{{ item.product.title }}
+            {% if item.quantity > 1 %}
+            <span class="quantity">
+              x{{ item.quantity }}
+            </span>
+            {% endif %}
+          </a>
+          <p class="line-item__desc">
+            {{ item.variant.title }}, {{ item.price |  money_without_trailing_zeros }}
+          </p>
+
+
+      <div class="info-actions">
+        {% assign quantity_id = 'updates_' | append: item.key %}
+        {% include 'quantity-picker' with name: 'updates[]', id: quantity_id, value: item.quantity, min: 0, max: item.variant.inventory_quantity, field_class: 'js-line-quantity' %}
+      </div>
+    </div>
+
+    <div class="line-item__remove-wrapper">
+        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="js-remove-line">
+            {% include 'inline-icon' with svg: 'icon-x.svg', alt: 'remove', class: 'remove icon' %}
+        </a>
+    </div>
+  </div>

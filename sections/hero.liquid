@@ -1,0 +1,93 @@
+
+<section class="hero-section">
+    <div class="hero-section__inner">
+        <div class="hero-section__content-wrapper">
+            {% if section.settings.title != blank %}
+                <h1 class="hero-section__title">{{ section.settings.title }}</h1>
+            {% endif %}
+
+            {% if section.settings.hero_content != blank %}
+                <p class="hero-section__content">{{ section.settings.hero_content }}</p>
+            {% endif %}
+
+            {% if section.settings.hero_helper_text != blank %}
+                <p class="hero-section__helper-text">{{ section.settings.hero_helper_text }}</p>
+            {% endif %}
+
+            {% if section.settings.hero_product != blank %}
+            <form id="add-to-cart-form" action="/cart/add" method="post" enctype="multipart/form-data">
+                <input class="js-variant-id" type="hidden" name="id" value="{{ section.settings.hero_product.variants.first.id }}" />
+
+                <input type="hidden" id="Quantity" name="quantity" value="1" min="1" max="1" />
+                <button class="hero-section__button kin-button kin-button--primary" type="submit" name="add" id="add-to-cart-button">$149 (5% Off)</button>
+            </form>
+            {% endif %}
+        </div>
+
+    </div>
+    {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'hero-section__image', alt: section.settings.hero_image.alt  }}
+    {% endif %}
+
+    {% if section.settings.hero_image_mobile != blank %}
+        {{ section.settings.hero_image_mobile | image_url: width: 1000 | image_tag: loading: 'lazy', class: 'hero-section__image-mobile', alt: section.settings.hero_image_mobile.alt  }}
+    {% endif %}
+
+</section>
+
+{% style %}
+#shopify-section-{{ section.id }} {
+    background: {{ section.settings.background }};
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "tag": "section",
+  "settings": [
+    {
+        "type": "textarea",
+        "id": "title",
+        "label": "Hero Title"
+    },
+    {
+        "type": "text",
+        "id": "hero_content",
+        "label": "Hero Content"
+    },
+    {
+        "type": "text",
+        "id": "hero_helper_text",
+        "label": "Hero Helper Text"
+    },
+    {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Hero Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "hero_image_mobile",
+        "label": "Mobile Hero Image"
+    },
+    {
+        "type": "color_background",
+        "id": "background",
+        "label": "Background",
+        "default": "linear-gradient(#ffffff, #000000)"
+    },
+    {
+        "type": "product",
+        "id": "hero_product",
+        "label": "Product"
+    }
+  ],
+  "presets": [
+      {
+        "name": "Hero Section"
+      }
+   ]
+}
+{% endschema %}
